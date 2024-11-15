@@ -28,7 +28,7 @@ docker container exec -it topic-cleaner-broker sh
 
 #### produce data
 
-`uv run serial_tombstone_prod.py --topic init4 --keys key1,key2,key3 --num_messages 500 --wait_time 100`
+`uv run serial_tombstone_prod.py --topic my_topic --keys key1,key2,key3 --num_messages 500 --wait_time 100`
 
 #### consume data
 
@@ -49,29 +49,43 @@ Get topic configs:
 
 #### Topic
 
-`segment.bytes` - 1GB by default
+`cleanup.policy` - `delete` by default
 
-`segment.ms` - 24h by default
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#cleanup-policy
 
-`min.cleanable.dirty.ratio` - 
+`segment.bytes` - 1073741824 by default
 
-`min.compaction.lag.ms` - 
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-bytes
 
-`max.compaction.lag.ms` - 
+`segment.index.bytes` - 10485760 by default
 
+If we are going to tweak the segment sizes, we might want to do so for the indexes too. 
+
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-index-bytes
+
+`segment.ms` - 604800000 (7d) by default
+
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#segment-ms
+
+`min.cleanable.dirty.ratio` - 0.5 by default
+
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#min-cleanable-dirty-ratio
+
+`min.compaction.lag.ms` - 0 by default
+
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#min-compaction-lag-ms
+
+`max.compaction.lag.ms` - 9223372036854775807
+
+https://docs.confluent.io/platform/current/installation/configuration/topic-configs.html#max-compaction-lag-ms
 
 #### Log cleaner threads - broker
 
 Not available on CCloud. 
 
-`log.cleaner.backoff.ms` - 
+Look at all `log.cleaner.*` configs
 
-`log.cleaner.threads` - 
-
-`log.retention.check.interval.ms` - 
-
-`log.cleaner.io.max.bytes.per.second` - 
-
+https://docs.confluent.io/platform/current/installation/configuration/broker-configs.html#log-cleaner-backoff-ms
 
 ### example for handling tombstones
 

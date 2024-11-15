@@ -2,5 +2,6 @@ cleanup.policy=compact
 segment.bytes=100000
 segment.ms=30000
 min.cleanable.dirty.ratio=0.01
-min.compaction.lag.ms=1
+min.compaction.lag.ms=0
 max.compaction.lag.ms=10000
+delete.retention.ms=10000

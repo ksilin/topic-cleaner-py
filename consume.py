@@ -87,9 +87,6 @@ def main():
                 if v == 'TOMBSTONE':
                     print(f"{k}: {Fore.RED}☠ TOMBSTONE ☠{Style.RESET_ALL}")
                 else:
-                    if args.mode == 'watch':
-                        print(f"{k}: {v}")
-                    elif args.mode == 'view':
                         print(f"{k}: {v}")
 
             time.sleep(args.sleep_time)
